@@ -1,0 +1,15 @@
+site_name: Dokumentacja Projektu 18
+site_description: Automatycznie generowana dokumentacja dla Pythona (i w przyszłości Scali).
+theme:
+    name: material
+    palette:
+        primary: blue
+plugins:
+    - search
+    - mkdocstrings:
+          handlers:
+              python:
+                  paths: [src]
+nav:
+    - Strona Główna: index.md
+    - Moduł Kalkulatora: calculator.md
