@@ -13,4 +13,4 @@ plugins:
 nav:
     - Strona Główna: index.md
     - Moduł Pythona (Kalkulator): calculator.md
-    - Moduł Scali (API): scala-api/index.html
+    - Moduł Scali (API): scala.md
