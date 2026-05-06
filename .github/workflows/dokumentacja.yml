@@ -4,6 +4,9 @@ on:
     push:
         branches:
             - test-branch
+            - main
+    release:
+        types: [published] # Uruchamia generowanie przy publikacji nowej wersji (Release)
 
 permissions:
     contents: write
