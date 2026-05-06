@@ -3,7 +3,7 @@ name: Generuj Dokumentacje
 on:
     push:
         branches:
-            - main
+            - test-branch
 
 permissions:
     contents: write
