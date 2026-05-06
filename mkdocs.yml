@@ -1,11 +1,10 @@
 site_name: Firmowa Dokumentacja (Projekt 18)
-site_description: Ustandaryzowana dokumentacja dla projektów Python i Scala.
+site_description: Ustandaryzowana i wersjonowana dokumentacja dla projektów Python i Scala.
 theme:
     name: material
     logo: material/library
     favicon: material/library
     palette:
-        # Tryb jasny
         - media: "(prefers-color-scheme: light)"
           scheme: default
           primary: deep purple
@@ -13,7 +12,6 @@ theme:
           toggle:
               icon: material/weather-night
               name: Przełącz na tryb ciemny
-        # Tryb ciemny
         - media: "(prefers-color-scheme: dark)"
           scheme: slate
           primary: deep purple
@@ -24,12 +22,20 @@ theme:
     features:
         - navigation.tabs
         - navigation.top
+        - navigation.instant
+        - content.code.copy
+
+extra:
+    version:
+        provider: mike
+
 plugins:
     - search
     - mkdocstrings:
           handlers:
               python:
                   paths: [src]
+
 nav:
     - Strona Główna: index.md
     - Moduł Pythona (Kalkulator): calculator.md
