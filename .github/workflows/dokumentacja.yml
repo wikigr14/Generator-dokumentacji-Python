@@ -15,14 +15,34 @@ jobs:
             - name: Pobranie repozytorium
               uses: actions/checkout@v4
 
+            # PYTHON
             - name: Konfiguracja Pythona
               uses: actions/setup-python@v5
               with:
                   python-version: 3.x
 
-            - name: Instalacja zależności
+            - name: Instalacja zależności Pythona
               run: |
                   pip install mkdocs-material mkdocstrings[python]
 
-            - name: Budowanie i publikacja (GitHub Pages)
+            # SCALA
+            - name: Konfiguracja Javy (wymagana dla Scali)
+              uses: actions/setup-java@v3
+              with:
+                  distribution: "temurin"
+                  java-version: "17"
+
+            - name: Konfiguracja sbt (Scala Build Tool)
+              uses: sbt/setup-sbt@v1
+
+            - name: Generowanie dokumentacji Scali (Scaladoc)
+              run: sbt doc
+
+            # CONNECT
+            - name: Kopiowanie Scaladoc do folderu MkDocs
+              run: |
+                  mkdir -p docs/scala-api
+                  cp -r target/scala-2.13/api/* docs/scala-api/
+
+            - name: Budowanie i publikacja całości (GitHub Pages)
               run: mkdocs gh-deploy --force
