@@ -1,9 +1,29 @@
-site_name: Dokumentacja Projektu 18
-site_description: Automatycznie generowana dokumentacja dla Pythona i Scali.
+site_name: Firmowa Dokumentacja (Projekt 18)
+site_description: Ustandaryzowana dokumentacja dla projektów Python i Scala.
 theme:
     name: material
+    logo: material/library
+    favicon: material/library
     palette:
-        primary: blue
+        # Tryb jasny
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+          primary: deep purple
+          accent: deep purple
+          toggle:
+              icon: material/weather-night
+              name: Przełącz na tryb ciemny
+        # Tryb ciemny
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          primary: deep purple
+          accent: deep purple
+          toggle:
+              icon: material/weather-sunny
+              name: Przełącz na tryb jasny
+    features:
+        - navigation.tabs
+        - navigation.top
 plugins:
     - search
     - mkdocstrings:
