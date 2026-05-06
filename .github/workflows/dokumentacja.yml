@@ -6,7 +6,7 @@ on:
             - test-branch
             - main
     release:
-        types: [published] # Uruchamia generowanie przy publikacji nowej wersji (Release)
+        types: [published]
 
 permissions:
     contents: write
@@ -17,6 +17,8 @@ jobs:
         steps:
             - name: Pobranie repozytorium
               uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0 # Wymagane przez mike, aby widzieć historię gałęzi gh-pages
 
             - name: Konfiguracja Pythona
               uses: actions/setup-python@v5
@@ -25,7 +27,7 @@ jobs:
 
             - name: Instalacja zależności Pythona
               run: |
-                  pip install mkdocs-material mkdocstrings[python]
+                  pip install mkdocs-material mkdocstrings[python] mike
 
             - name: Konfiguracja Javy
               uses: actions/setup-java@v3
@@ -44,5 +46,19 @@ jobs:
                   mkdir -p docs/scala-api
                   cp -r target/scala-*/api/* docs/scala-api/
 
-            - name: Budowanie i publikacja całości
-              run: mkdocs gh-deploy --force
+            - name: Konfiguracja Git dla Mike
+              run: |
+                  git config --global user.name "github-actions[bot]"
+                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+            - name: Budowanie i publikacja wersji (mike)
+              run: |
+                  # Jeśli to push na test-branch, oznacz jako 'latest'
+                  # Jeśli to oficjalny Release, oznacz numerem wersji tagu
+                  if [ "${{ github.event_name }}" = "release" ]; then
+                    VERSION_NAME="${{ github.event.release.tag_name }}"
+                    mike deploy --push --update-aliases $VERSION_NAME latest
+                  else
+                    mike deploy --push --update-aliases latest
+                  fi
+                  mike set-default --push latest
