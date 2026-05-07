@@ -18,7 +18,7 @@ jobs:
             - name: Pobranie repozytorium
               uses: actions/checkout@v4
               with:
-                  fetch-depth: 0 # Wymagane przez mike, aby widzieć historię gałęzi gh-pages
+                  fetch-depth: 0
 
             - name: Konfiguracja Pythona
               uses: actions/setup-python@v5
@@ -53,8 +53,6 @@ jobs:
 
             - name: Budowanie i publikacja wersji (mike)
               run: |
-                  # Jeśli to push na test-branch, oznacz jako 'latest'
-                  # Jeśli to oficjalny Release, oznacz numerem wersji tagu
                   if [ "${{ github.event_name }}" = "release" ]; then
                     VERSION_NAME="${{ github.event.release.tag_name }}"
                     mike deploy --push --update-aliases $VERSION_NAME latest
