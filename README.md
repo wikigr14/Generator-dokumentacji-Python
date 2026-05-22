@@ -15,4 +15,4 @@ pip install -r requirements.txt
 Aby uruchomić dokumentację, wpisz:
 mkdocs serve
 
-Dokumentacja będzie dostępna w przeglądarce pod adresem http://127.0.0.1:8000/
+Dokumentacja będzie dostępna w przeglądarce pod adresem [link]
