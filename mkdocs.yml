@@ -3,13 +3,13 @@ site_description: Ustandaryzowana i wersjonowana dokumentacja dla projektów Pyt
 site_url: https://wikigr14.github.io/Generator-dokumentacji-Python/
 theme:
     name: material
-    logo: material/library
-    favicon: material/library
+    icon:
+        logo: material/library
     palette:
         - media: "(prefers-color-scheme: light)"
           scheme: default
-          primary: deep purple
-          accent: deep purple
+          primary: blue
+          accent: blue
           toggle:
               icon: material/weather-night
               name: Przełącz na tryb ciemny
@@ -25,7 +25,8 @@ theme:
         - navigation.top
         - navigation.instant
         - content.code.copy
-
+        - navigation.sections
+        - navigation.expand
 extra:
     version:
         provider: mike
@@ -39,5 +40,7 @@ plugins:
 
 nav:
     - Strona Główna: index.md
-    - Moduł Pythona (Kalkulator): calculator.md
-    - Moduł Scali (API): scala.md
+    - Moduł Pythona:
+        - Omówienie: calculator.md
+    - Moduł Scali (API):
+        - Omówienie: scala.md
