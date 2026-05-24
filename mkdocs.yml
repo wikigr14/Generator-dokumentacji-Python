@@ -8,8 +8,8 @@ theme:
     palette:
         - media: "(prefers-color-scheme: light)"
           scheme: default
-          primary: blue
-          accent: blue
+          primary: deep purple
+          accent: deep purple
           toggle:
               icon: material/weather-night
               name: Przełącz na tryb ciemny
@@ -27,6 +27,7 @@ theme:
         - content.code.copy
         - navigation.sections
         - navigation.expand
+
 extra:
     version:
         provider: mike
