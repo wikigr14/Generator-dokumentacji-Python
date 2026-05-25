@@ -1,66 +1,69 @@
 name: Generuj Dokumentacje
 
 on:
-    push:
-        branches:
-            - main
-            - develop
-            - feature/ci-cd-pipeline
-    pull_request:
-        branches:
-            - develop
+  push:
+    branches:
+      - main
+      - develop
+  release:
+    types: [published]
+  pull_request:
+    branches:
+      - develop
 
 permissions:
-    contents: write
+  contents: write
 
 jobs:
-    deploy:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Pobranie repozytorium
-              uses: actions/checkout@v4
-              with:
-                  fetch-depth: 0
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pobranie repozytorium
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-            - name: Konfiguracja Pythona
-              uses: actions/setup-python@v5
-              with:
-                  python-version: 3.x
+      - name: Konfiguracja Pythona
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
 
-            - name: Instalacja zależności Pythona
-              run: |
-                  # Używamy pliku requirements.txt stworzonego w poprzednim Issue
-                  pip install -r requirements.txt
+      - name: Instalacja zależności Pythona
+        run: |
+          # Używamy pliku requirements.txt stworzonego w poprzednim Issue
+          pip install -r requirements.txt
 
-            - name: Konfiguracja Javy
-              uses: actions/setup-java@v3
-              with:
-                  distribution: "temurin"
-                  java-version: "17"
+      - name: Konfiguracja Javy
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
 
-            - name: Konfiguracja sbt
-              uses: sbt/setup-sbt@v1
+      - name: Konfiguracja sbt
+        uses: sbt/setup-sbt@v1
 
-            - name: Generowanie dokumentacji Scali
-              run: sbt doc
+      - name: Generowanie dokumentacji Scali
+        run: sbt doc
 
-            - name: Kopiowanie Scaladoc do folderu MkDocs
-              run: |
-                  # Zabezpieczenie przed brakiem folderu i kopiowanie wygenerowanych plików
-                  # (dostosowane do struktury docs/scaladoc z Twojego zrzutu)
-                  mkdir -p docs/scaladoc
-                  cp -r target/scala-*/api/* docs/scaladoc/ || echo "Nie znaleziono plików api Scali, pomijam kopiowanie"
+      - name: Kopiowanie Scaladoc do folderu MkDocs
+        run: |
+          # Zabezpieczenie przed brakiem folderu i kopiowanie wygenerowanych plików
+          # (dostosowane do struktury docs/scaladoc z Twojego zrzutu)
+          mkdir -p docs/scaladoc
+          cp -r target/scala-*/api/* docs/scaladoc/ || echo "Nie znaleziono plików api Scali, pomijam kopiowanie"
 
-            - name: Konfiguracja Git dla Mike
-              run: |
-                  git config --global user.name "github-actions[bot]"
-                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Konfiguracja Git dla Mike
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-            - name: Budowanie i publikacja wersji (mike)
-              run: |
-                  # Usuwamy stary latest, żeby zapobiec konfliktom nazw
-                  mike delete --push latest || true
-
-                  # Publikacja na gh-pages pod aliasami dev oraz latest
-                  mike deploy --push --update-aliases dev latest
-                  mike set-default --push latest
+      - name: Budowanie i publikacja wersji (mike)
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            VERSION_NAME="${{ github.event.release.tag_name }}"
+            mike deploy --push --update-aliases $VERSION_NAME latest
+          else
+            mike deploy --push dev
+          fi
+          
+          mike set-default --push latest

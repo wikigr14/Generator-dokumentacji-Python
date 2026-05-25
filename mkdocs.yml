@@ -1,7 +1,3 @@
-site_name: Nazwa Twojego Projektu
-nav:
-  - Strona Główna: index.md
-  - Scala API: scala.md
 site_name: Firmowa Dokumentacja (Projekt 18)
 site_description: Ustandaryzowana i wersjonowana dokumentacja dla projektów Python i Scala.
 site_url: https://wikigr14.github.io/Generator-dokumentacji-Python/
@@ -12,8 +8,8 @@ theme:
     palette:
         - media: "(prefers-color-scheme: light)"
           scheme: default
-          primary: deep purple
-          accent: deep purple
+          primary: blue
+          accent: blue
           toggle:
               icon: material/weather-night
               name: Przełącz na tryb ciemny
@@ -46,6 +42,6 @@ plugins:
 nav:
     - Strona Główna: index.md
     - Moduł Pythona:
-        - Omówienie: calculator.md
+          - Omówienie: calculator.md
     - Moduł Scali (API):
-        - Omówienie: scala.md
+          - Omówienie: scala.md
