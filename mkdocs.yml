@@ -1,0 +1,4 @@
+site_name: Nazwa Twojego Projektu
+nav:
+  - Strona Główna: index.md
+  - Scala API: scala.md
