@@ -1,0 +1,66 @@
+name: Generuj Dokumentacje
+
+on:
+    push:
+        branches:
+            - test-branch
+            - main
+    release:
+        types: [published]
+
+permissions:
+    contents: write
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Pobranie repozytorium
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Konfiguracja Pythona
+              uses: actions/setup-python@v5
+              with:
+                  python-version: 3.x
+
+            - name: Instalacja zależności Pythona
+              run: |
+                  pip install mkdocs-material mkdocstrings[python] mike
+
+            - name: Konfiguracja Javy
+              uses: actions/setup-java@v3
+              with:
+                  distribution: "temurin"
+                  java-version: "17"
+
+            - name: Konfiguracja sbt
+              uses: sbt/setup-sbt@v1
+
+            - name: Generowanie dokumentacji Scali
+              run: sbt doc
+
+            - name: Kopiowanie Scaladoc do folderu MkDocs
+              run: |
+                  mkdir -p docs/scala-api
+                  cp -r target/scala-*/api/* docs/scala-api/
+
+            - name: Konfiguracja Git dla Mike
+              run: |
+                  git config --global user.name "github-actions[bot]"
+                  git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+            - name: Budowanie i publikacja wersji (mike)
+              run: |
+                  # Rozwiązanie konfliktu: usunięcie fizycznej wersji 'latest', by zwolnić nazwę dla aliasu
+                  mike delete --push latest || true
+
+                  if [ "${{ github.event_name }}" = "release" ]; then
+                    VERSION_NAME="${{ github.event.release.tag_name }}"
+                    mike deploy --push --update-aliases $VERSION_NAME latest
+                  else
+                    # Zwykłe wypchnięcia trafiają do wersji 'dev', która otrzymuje alias 'latest'
+                    mike deploy --push --update-aliases dev latest
+                  fi
+                  mike set-default --push latest
