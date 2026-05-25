@@ -16,3 +16,16 @@ Aby uruchomić dokumentację, wpisz:
 mkdocs serve
 
 Dokumentacja będzie dostępna w przeglądarce pod adresem [link]
+
+
+#Generowanie dokumentacji dla kodu Scala (Scaladoc)
+Wymagania systemowe do uruchomienia projektu w Scali:
+
+Zainstalowane Java Development Kit (JDK) (np. wersja 11 lub 17). Zmienna środowiskowa JAVA_HOME musi być poprawnie skonfigurowana.
+
+Zainstalowane narzędzie sbt (Scala Build Tool).
+
+Aby wygenerować dokumentację, przejdź do folderu src/scala i wpisz komendę:
+sbt doc
+
+Gotowa dokumentacja zostanie wygenerowana w lokalizacji: src/scala/target/scala-2.13/api/index.html.
