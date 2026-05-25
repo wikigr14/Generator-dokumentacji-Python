@@ -12,8 +12,8 @@ theme:
     palette:
         - media: "(prefers-color-scheme: light)"
           scheme: default
-          primary: deep purple
-          accent: deep purple
+          primary: blue
+          accent: blue
           toggle:
               icon: material/weather-night
               name: Przełącz na tryb ciemny
