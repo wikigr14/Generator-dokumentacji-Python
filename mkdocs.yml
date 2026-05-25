@@ -1,3 +1,7 @@
+site_name: Nazwa Twojego Projektu
+nav:
+  - Strona Główna: index.md
+  - Scala API: scala.md
 site_name: Firmowa Dokumentacja (Projekt 18)
 site_description: Ustandaryzowana i wersjonowana dokumentacja dla projektów Python i Scala.
 site_url: https://wikigr14.github.io/Generator-dokumentacji-Python/
