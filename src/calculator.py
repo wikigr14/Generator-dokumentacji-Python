@@ -7,7 +7,7 @@ Stanowi przykład do automatycznego generowania dokumentacji.
 
 def add(a: float, b: float) -> float:
     """
-    Dodaje dwie liczby do siebie.
+    Dodaje dwie liczby do siebie
 
     Args:
         a (float): Pierwsza liczba.
