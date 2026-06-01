@@ -56,11 +56,13 @@ jobs:
 
             - name: Budowanie i publikacja wersji (mike)
               run: |
+                  mike delete --push latest || true
+
                   if [ "${{ github.event_name }}" = "release" ]; then
                     VERSION_NAME="${{ github.event.release.tag_name }}"
                     mike deploy --push --update-aliases $VERSION_NAME latest
                   else
-                    mike deploy --push dev
+                    mike deploy --push --update-aliases dev latest
                   fi
 
                   mike set-default --push latest
