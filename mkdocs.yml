@@ -25,6 +25,7 @@ theme:
         - navigation.top
         - navigation.instant
         - content.code.copy
+        - content.code.annotate
         - navigation.sections
         - navigation.expand
 
@@ -38,6 +39,13 @@ plugins:
           handlers:
               python:
                   paths: [src]
+
+markdown_extensions:
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences
+    - pymdownx.tabbed:
+          alternate_style: true
 
 nav:
     - Strona Główna: index.md
