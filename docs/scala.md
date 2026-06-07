@@ -2,4 +2,9 @@
 
 Poniżej znajduje się automatycznie wygenerowana dokumentacja natywnym narzędziem Scaladoc.
 
+=== "Scala"
+
+    ```scala
+    println("Przelaczalne zakladki dzialaja!")
+    ```
 <iframe src="../scaladoc/index.html" width="100%" height="800px" style="border:none;"></iframe>
