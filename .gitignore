@@ -1,0 +1,25 @@
+# MkDocs - wygenerowana dokumentacja statyczna
+site/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+venv/
+.venv/
+*.egg-info/
+
+# sbt / Scala
+target/
+project/target/
+project/project/
+.bsp/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# System
+.DS_Store
+Thumbs.db

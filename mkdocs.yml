@@ -43,13 +43,19 @@ plugins:
 markdown_extensions:
     - admonition
     - pymdownx.details
-    - pymdownx.superfences
+    - pymdownx.superfences:
+          custom_fences:
+              - name: mermaid
+                class: mermaid
+                format: !!python/name:pymdownx.superfences.fence_code_format
     - pymdownx.tabbed:
           alternate_style: true
 
 nav:
     - Strona Główna: index.md
     - Moduł Pythona:
-          - Omówienie: calculator.md
+          - Kalkulator: calculator.md
+          - Wzorce Projektowe: python.md
+    - Architektura: architecture.md
     - Moduł Scali (API):
           - Omówienie: scala.md
