@@ -24,7 +24,8 @@ jobs:
                   fetch-depth: 0
 
             - name: Instalacja Graphviz
-              # Wymagany przez: pyreverse -o png (Python) oraz sbt doc -diagrams (Scala)
+              # Wymagany przez pyreverse -o png (diagramy Python)
+              # oraz sbt doc -diagrams (Scaladoc z grafami dziedziczenia w HTML)
               run: sudo apt-get install -y graphviz
 
             - name: Konfiguracja Pythona
@@ -44,8 +45,7 @@ jobs:
             - name: Konfiguracja sbt
               uses: sbt/setup-sbt@v1
 
-            - name: Generowanie dokumentacji Scali (z grafami dziedziczenia)
-              # Flaga -diagrams w build.sbt generuje PNG w target/scala-*/api/
+            - name: Generowanie Scaladoc (z grafami dziedziczenia w HTML)
               run: sbt doc
 
             - name: Kopiowanie Scaladoc do folderu MkDocs
@@ -53,9 +53,9 @@ jobs:
                   mkdir -p docs/scaladoc
                   cp -r target/scala-*/api/* docs/scaladoc/ || echo "Nie znaleziono plików Scaladoc, pomijam"
 
-            - name: Generowanie wszystkich diagramów i aktualizacja nav
-              # Skanuje src/python/ i target/scala-*/api/,
-              # generuje PNG dla każdego modułu i aktualizuje mkdocs.yml
+            - name: Generowanie diagramów PNG dla modułów Python
+              # Skanuje src/python/, generuje PNG przez pyreverse
+              # i aktualizuje sekcję nav w mkdocs.yml
               run: python scripts/generate_diagrams.py
 
             - name: Konfiguracja Git dla Mike
