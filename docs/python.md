@@ -7,38 +7,38 @@ wzorzec projektowy **Strategia** (Strategy Pattern).
 
 ## Przykład użycia
 
-Poniżej przykład zastosowania wzorca w obu językach — logika jest identyczna,
-różni się tylko składnia:
-
 === "Python"
 
     ```python
     from pattern import CreditCardPayment, PayPalPayment
 
-    # Wybór strategii w zależności od preferencji użytkownika
-    strategy = CreditCardPayment()
-    print(strategy.pay(99.99))
-    # Zapłacono 99.99 PLN przy użyciu karty kredytowej.
+    strategy = CreditCardPayment()       # (1)
+    print(strategy.pay(99.99))           # (2)
 
-    strategy = PayPalPayment()
+    strategy = PayPalPayment()           # (3)
     print(strategy.pay(49.99))
-    # Zapłacono 49.99 PLN przy użyciu systemu PayPal.
     ```
+
+    1. Tworzymy konkretną strategię — możemy ją podmienić w dowolnym momencie
+    2. Wypisuje: `Zapłacono 99.99 PLN przy użyciu karty kredytowej.`
+    3. Podmiana strategii — kod klienta się nie zmienia, zmienia się tylko obiekt
 
 === "Scala"
 
     ```scala
     import payment._
 
-    // Wybór strategii w zależności od preferencji użytkownika
-    val strategy: PaymentStrategy = new CreditCardPayment("4111111111111111")
-    println(strategy.pay(99.99))
-    // Zapłacono 99.99 PLN kartą kredytową (nr: ****1111).
+    val strategy: PaymentStrategy =      // (1)
+      new CreditCardPayment("4111111111111111")
+    println(strategy.pay(99.99))         // (2)
 
-    val strategy2: PaymentStrategy = new PayPalPayment("user@example.com")
+    val strategy2: PaymentStrategy =
+      new PayPalPayment("user@example.com")
     println(strategy2.pay(49.99))
-    // Zapłacono 49.99 PLN przez PayPal (konto: user@example.com).
     ```
+
+    1. Typ zmiennej to `PaymentStrategy` (trait), nie konkretna klasa — to sedno wzorca
+    2. Wypisuje: `Zapłacono 99.99 PLN kartą kredytową (nr: ****1111).`
 
 ---
 

@@ -29,11 +29,19 @@ MKDOCS_YML = ROOT / "mkdocs.yml"
 DOCS_DIAGRAMS.mkdir(parents=True, exist_ok=True)
 
 
+def has_classes(py_file: Path) -> bool:
+    """Zwraca True jeśli plik .py zawiera definicje klas."""
+    content = py_file.read_text(encoding="utf-8")
+    return bool(re.search(r"^\s*class\s+\w+", content, re.MULTILINE))
+
+
 def get_python_modules() -> list[Path]:
-    """Zwraca posortowaną listę plików .py z src/python/."""
+    """Zwraca posortowaną listę plików .py z src/python/ które zawierają klasy."""
     return sorted(
         f for f in SRC_PYTHON.glob("*.py")
-        if f.name != "__init__.py" and not f.name.startswith(".")
+        if f.name != "__init__.py"
+        and not f.name.startswith(".")
+        and has_classes(f)
     )
 
 
