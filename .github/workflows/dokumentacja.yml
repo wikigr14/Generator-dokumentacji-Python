@@ -23,17 +23,20 @@ jobs:
               with:
                   fetch-depth: 0
 
+            - name: Instalacja Graphviz
+              # Wymagany przez: pyreverse -o png (Python) oraz sbt doc -diagrams (Scala)
+              run: sudo apt-get install -y graphviz
+
             - name: Konfiguracja Pythona
               uses: actions/setup-python@v5
               with:
                   python-version: 3.x
 
             - name: Instalacja zależności Pythona
-              run: |
-                  pip install -r requirements.txt
+              run: pip install -r requirements.txt
 
             - name: Konfiguracja Javy
-              uses: actions/setup-java@v3
+              uses: actions/setup-java@v4
               with:
                   distribution: "temurin"
                   java-version: "17"
@@ -41,13 +44,19 @@ jobs:
             - name: Konfiguracja sbt
               uses: sbt/setup-sbt@v1
 
-            - name: Generowanie dokumentacji Scali
+            - name: Generowanie dokumentacji Scali (z grafami dziedziczenia)
+              # Flaga -diagrams w build.sbt generuje PNG w target/scala-*/api/
               run: sbt doc
 
             - name: Kopiowanie Scaladoc do folderu MkDocs
               run: |
                   mkdir -p docs/scaladoc
-                  cp -r target/scala-*/api/* docs/scaladoc/ || echo "Nie znaleziono plików api Scali, pomijam kopiowanie"
+                  cp -r target/scala-*/api/* docs/scaladoc/ || echo "Nie znaleziono plików Scaladoc, pomijam"
+
+            - name: Generowanie wszystkich diagramów i aktualizacja nav
+              # Skanuje src/python/ i target/scala-*/api/,
+              # generuje PNG dla każdego modułu i aktualizuje mkdocs.yml
+              run: python scripts/generate_diagrams.py
 
             - name: Konfiguracja Git dla Mike
               run: |
@@ -56,13 +65,10 @@ jobs:
 
             - name: Budowanie i publikacja wersji (mike)
               run: |
-                  mike delete --push latest || true
-
                   if [ "${{ github.event_name }}" = "release" ]; then
                     VERSION_NAME="${{ github.event.release.tag_name }}"
                     mike deploy --push --update-aliases $VERSION_NAME latest
+                    mike set-default --push latest
                   else
-                    mike deploy --push --update-aliases dev latest
+                    mike deploy --push dev
                   fi
-
-                  mike set-default --push latest
