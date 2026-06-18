@@ -62,5 +62,8 @@ nav:
           - Kalkulator: calculator.md
           - Wzorce Projektowe: python.md
     - Architektura: architecture.md
+    - Diagramy Python:
+          - calculator: diagrams/python_calculator.md
+          - pattern: diagrams/python_pattern.md
     - Moduł Scali (API):
           - Omówienie: scala.md
