@@ -16,7 +16,7 @@
         <link rel="prev" href="../python/">
       
       
-        <link rel="next" href="../scala/">
+        <link rel="next" href="../diagrams/python_calculator/">
       
       
         
@@ -268,6 +268,46 @@
 
       </a>
     </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../diagrams/python_calculator/" class="md-tabs__link">
+          
+  
+  
+  Diagramy Python
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../diagrams/scala_diagrams/" class="md-tabs__link">
+          
+  
+  
+  Diagramy Scala
+
+        </a>
+      </li>
+    
   
 
       
@@ -585,7 +625,7 @@
   <span class="md-ellipsis">
     
   
-    Moduł Scali (API)
+    Diagramy Python
   
 
     
@@ -598,6 +638,212 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Diagramy Python
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagrams/python_calculator/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    calculator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagrams/python_pattern/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    pattern
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Diagramy Scala
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Diagramy Scala
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagrams/scala_diagrams/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wszystkie diagramy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Moduł Scali (API)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -697,34 +943,26 @@
 
 
 <h1 id="architektura-systemu">Architektura systemu</h1>
-<p>Poniżej znajduje się diagram klas odwzorowujący strukturę wzorca projektowego <strong>Strategia</strong> (Strategy),
-zaimplementowanego w module płatności.</p>
+<p>Diagram klas wygenerowany automatycznie z kodu źródłowego przez narzędzie <code>pyreverse</code>
+w ramach potoku CI/CD. Odzwierciedla aktualną strukturę modułu płatności.</p>
 <h2 id="diagram-klas-wzorzec-strategii">Diagram klas — Wzorzec Strategii</h2>
-<pre class="mermaid"><code>classDiagram
-    class PaymentStrategy {
-        &lt;&lt;abstract&gt;&gt;
-        +pay(amount: float) str*
-    }
-
-    class CreditCardPayment {
-        +pay(amount: float) str
-    }
-
-    class PayPalPayment {
-        +pay(amount: float) str
-    }
-
-    PaymentStrategy &lt;|-- CreditCardPayment : dziedziczy
-    PaymentStrategy &lt;|-- PayPalPayment : dziedziczy</code></pre>
+<p><img alt="Diagram klas wzorca Strategii" src="../diagrams/classes_payment.png" /></p>
 <div class="admonition info">
 <p class="admonition-title">Wzorzec Strategii</p>
-<p>Wzorzec <strong>Strategy</strong> pozwala zdefiniować rodzinę algorytmów, enkapsulować każdy z nich
-i uczynić je wymiennymi. Dzięki temu algorytm może się zmieniać niezależnie od klientów, które z niego korzystają.</p>
+<p>Wzorzec <strong>Strategy</strong> pozwala zdefiniować rodzinę algorytmów, enkapsulować
+każdy z nich i uczynić je wymiennymi. Algorytm może się zmieniać niezależnie
+od klientów, które z niego korzystają.</p>
 <ul>
 <li><code>PaymentStrategy</code> — abstrakcyjna klasa bazowa definiująca kontrakt</li>
 <li><code>CreditCardPayment</code> — implementacja płatności kartą kredytową</li>
 <li><code>PayPalPayment</code> — implementacja płatności przez PayPal</li>
 </ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Diagram niedostępny lokalnie</p>
+<p>Plik <code>diagrams/classes_payment.png</code> jest generowany automatycznie podczas
+uruchomienia GitHub Actions. Lokalnie diagram nie będzie widoczny do czasu
+ręcznego uruchomienia <code>pyreverse -o png -p payment src/python/pattern.py</code>.</p>
 </div>
 
 
